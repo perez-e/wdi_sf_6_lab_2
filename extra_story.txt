@@ -1,0 +1,16 @@
+~p5
+You find two pills: the red and the blue pill.
+
+~p5:c1:p6
+red pill
+
+~p5:c2:p7
+blue pill
+
+~p6
+You take the blue pill – the story ends, you wake up in your bed and 
+believe whatever you want to believe.
+
+~p7
+You take the red pill – you stay in Wonderland, and I show you how 
+deep the rabbit hole goes.
