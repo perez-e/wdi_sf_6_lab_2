@@ -14,20 +14,27 @@ end
 restart = "yes"
 page = 1;
 while  restart.downcase.include?('yes') || restart.downcase.include?("y")
-	num = 0
-	my_hash.each_key do |key|
-		if key.match /~p#{page}$/
-			puts my_hash[key]
-		elsif key.match /~p#{page}:c\d/
-			num += 1
-			puts my_hash[key].delete("\n") + " : type " + "c#{num}"
+	while true
+		num = 0
+		my_hash.each_key do |key|
+			if key.match /~p#{page}$/
+				puts my_hash[key]
+			elsif key.match /~p#{page}:c\d/
+				num += 1
+				puts my_hash[key].delete("\n") + " : type " + "c#{num}"
+			end
 		end
-	end
 
-	puts
-	num = 0
-	print ">>> "
-	choice = gets.chomp
+		puts
+		num = 0
+		print ">>> "
+		choice = gets.chomp
+
+		puts "[Hit Enter to Continue]"
+		puts "[Return any key to undo choice]"
+		undo = gets.chomp
+		break if undo == ""
+	end
 
 	super_key = ""
 	my_hash.each_key do |key|
