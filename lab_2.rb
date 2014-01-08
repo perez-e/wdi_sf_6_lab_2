@@ -11,24 +11,38 @@ File.open("story.txt", "r") do |infile|
 	end
 end
 
-num = 0
-my_hash.each_key do |key|
-	if key.match /~p1$/
-		puts my_hash[key]
-	elsif key.match /~p1:c\d/
-		num += 1
-		puts my_hash[key].delete("\n") + " : press " + "c#{num}"
+restart = "yes"
+page = 1;
+while  restart.downcase.include?('yes') || restart.downcase.include?("y")
+	num = 0
+	my_hash.each_key do |key|
+		if key.match /~p#{page}$/
+			puts my_hash[key]
+		elsif key.match /~p#{page}:c\d/
+			num += 1
+			puts my_hash[key].delete("\n") + " : type " + "c#{num}"
+		end
 	end
-end
-num = 0
-print ">>> "
-choice = gets.chomp
 
-crazy_key = ""
-my_hash.each_key do |key|
-	if key.index choice
-		crazy_key = "~"+key[-2]+key[-1]
+	puts
+	num = 0
+	print ">>> "
+	choice = gets.chomp
+
+	super_key = ""
+	my_hash.each_key do |key|
+		if key.index choice
+			super_key = "~"+key[-2]+key[-1]
+		end
 	end
+
+	puts
+	puts my_hash[super_key].chomp
+	puts
+
+	print "Would you like to restart the story [y/n]: "
+	restart = gets.chomp
+	restart = "n" if restart == ""
 end
 
-puts my_hash[crazy_key]
+puts "Story telling is over."
